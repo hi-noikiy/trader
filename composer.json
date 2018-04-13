@@ -1,0 +1,13 @@
+{
+    "name": "garikcode/api",
+    "require": {
+        "slim/slim": "3.9.2",
+        "ccxt/ccxt": "1.11.172"
+    },
+    "authors": [
+        {
+            "name": "Igor Meshcheryakov",
+            "email": "mail@garik.site"
+        }
+    ]
+}
