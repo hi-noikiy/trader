@@ -31,7 +31,7 @@
   $container = $app->getContainer();
   $container['errorHandler'] = function ($container){
     return function ($request, $response, $exception) use ($container) {
-      return $container['response']->write(json_encode(['success'=>'false', 'error'=>'500']));
+      return $container['response']->write(json_encode(['success'=>'false', 'error'=>'501']));
     };
   };
   $container['notFoundHandler'] = function ($container){
@@ -274,10 +274,13 @@
 
         $exchange->apiKey = $login[0];
         $exchange->secret = $login[1];
+        //$exchange->verbose = true;
 
-        $market = strtoupper($args['market_a'].'/'.$args['market_b']);
+        $market = $args['market_a'].'/'.$args['market_b'];
+        $market = strtoupper($market);
 
-        $return = json_encode(['success'=>'true', 'return'=>$exchange->create_order($market, 'limit', 'buy', $args['quantity'], $args['rate'])]);
+        $return = $exchange->create_order($market, 'limit', 'sell', $args['quantity'], $args['rate']);
+        $return = json_encode(['success'=>'true', 'return'=>$return]);
 
       }
 
@@ -306,10 +309,13 @@
 
         $exchange->apiKey = $login[0];
         $exchange->secret = $login[1];
+        //$exchange->verbose = true;
 
-        $market = strtoupper($args['market_a'].'/'.$args['market_b']);
+        $market = $args['market_a'].'/'.$args['market_b'];
+        $market = strtoupper($market);
 
-        $return = json_encode(['success'=>'true', 'return'=>$exchange->create_order($market, 'limit', 'sell', $args['quantity'], $args['rate'])]);
+        $return = $exchange->create_order($market, 'limit', 'buy', $args['quantity'], $args['rate']);
+        $return = json_encode(['success'=>'true', 'return'=>$return]);
 
       }
 
@@ -356,3 +362,4 @@
 
 
 ?>
+
