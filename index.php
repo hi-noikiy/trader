@@ -279,7 +279,7 @@
         $market = $args['market_a'].'/'.$args['market_b'];
         $market = strtoupper($market);
 
-        $return = $exchange->create_order($market, 'limit', 'sell', $args['quantity'], $args['rate']);
+        $return = $exchange->create_order($market, 'limit', 'buy', $args['quantity'], $args['rate']);
         $return = json_encode(['success'=>'true', 'return'=>$return]);
 
       }
@@ -314,7 +314,7 @@
         $market = $args['market_a'].'/'.$args['market_b'];
         $market = strtoupper($market);
 
-        $return = $exchange->create_order($market, 'limit', 'buy', $args['quantity'], $args['rate']);
+        $return = $exchange->create_order($market, 'limit', 'sell', $args['quantity'], $args['rate']);
         $return = json_encode(['success'=>'true', 'return'=>$return]);
 
       }
