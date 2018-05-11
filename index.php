@@ -126,7 +126,7 @@
 
   $app->get('/{exchange}/ohlcv/{market_a}/{market_b}/{timeframe}/{limit}', function ($request, $response, $args) {
 
-    $cryptocompare = json_decode(file_get_contents('https://min-api.cryptocompare.com/data/'.$args['timeframe'].'?fsym='.$args['market_a'].'&tsym='.$args['market_b'].'&limit='.$args['limit'].'&aggregate=1&e='.$args['exchange']), true);
+    $cryptocompare = json_decode(file_get_contents('https://min-api.cryptocompare.com/data/'.$args['timeframe'].'?fsym='.mb_strtoupper($args['market_a']).'&tsym='.mb_strtoupper($args['market_b']).'&limit='.$args['limit'].'&aggregate=1&e='.$args['exchange']), true);
     print json_encode($cryptocompare['Data']);
 
   });
