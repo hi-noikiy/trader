@@ -124,28 +124,10 @@
 
   });
 
-  $app->get('/{exchange}/ohlcv/{market_a}/{market_b}/{timeframe}', function ($request, $response, $args) {
+  $app->get('/{exchange}/ohlcv/{market_a}/{market_b}/{timeframe}/{limit}', function ($request, $response, $args) {
 
-    $exchange = mb_strtolower($args['exchange']);
-    $exchange = '\\ccxt\\'.$exchange;
-    $exchange = new $exchange();
-
-    $market = strtoupper($args['market_a'].'/'.$args['market_b']);
-    $timeframe = $args['timeframe'];
-
-    if($exchange->has['fetchOHLCV']){
-
-      if(empty($exchange->timeframes[$timeframe])){
-        $return = json_encode(['success'=>'false', 'error'=>'Error timeframe', 'timeframes'=>$exchange->timeframes]);
-      }else{
-        $return = json_encode(['success'=>'true', 'return'=>$exchange->fetch_ohlcv($market, $timeframe)]);
-      }
-
-    }else{
-      $return = json_encode(['success'=>'false', 'error'=>'OHLCV disabled']);
-    }
-
-    return $response->getBody()->write($return);
+    $cryptocompare = json_decode(file_get_contents('https://min-api.cryptocompare.com/data/'.$args['timeframe'].'?fsym='.$args['market_a'].'&tsym='.$args['market_b'].'&limit='.$args['limit'].'&aggregate=1&e='.$args['exchange']), true);
+    print json_encode($cryptocompare['Data']);
 
   });
 
@@ -362,4 +344,3 @@
 
 
 ?>
-
