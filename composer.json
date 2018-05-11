@@ -1,5 +1,5 @@
 {
-    "name": "garikcode/api",
+    "name": "garik-code/trader",
     "require": {
         "slim/slim": "3.9.2",
         "ccxt/ccxt": "1.11.172"
