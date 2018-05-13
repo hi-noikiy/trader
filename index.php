@@ -50,6 +50,13 @@
     };
   };
 
+  $app->get('/url/{url}', function ($request, $response, $args) {
+    
+    $url = strtr($args['url'], ['$'=>'/']);
+    return $response->getBody()->write(file_get_contents($url));
+    
+  });
+
   $app->get('/exchanges', function ($request, $response, $args) {
 
     $exchanges = \ccxt\Exchange::$exchanges;
